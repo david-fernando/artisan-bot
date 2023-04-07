@@ -9,7 +9,7 @@ function apiBot(_:any, response: NextApiResponse){
   const initialMessage = `Olá, meu nome é Artisan!
 Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
 
-  const sorryMessage = `Sinto muito, mas ainda posso executar nenhum comando! 
+  const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
 Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
 
 
