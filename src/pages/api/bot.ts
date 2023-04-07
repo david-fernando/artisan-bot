@@ -19,7 +19,13 @@ Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisa
 
   bot.on('text', (context) => context.reply(sorryMessage));
 
-  bot.launch();
+  bot.launch({
+    webhook: {
+      domain: 'https://artisan-bot.vercel.app/api/bot/',
+      port: 8080 || process.env.PORT,
+      hookPath: bot.secretPathComponent(),
+    },
+  });
 
   response.json({ message: 'All Nice!' })
 }
