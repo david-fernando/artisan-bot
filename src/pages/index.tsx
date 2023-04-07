@@ -9,7 +9,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Bot for telegram that edits and makes arts with photos</h1>
+      <p>Telegram bot that edits and makes arts with your photos</p>
     </>
   )
 }
