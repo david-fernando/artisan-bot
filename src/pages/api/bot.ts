@@ -1,31 +1,13 @@
-import type { NextApiResponse } from 'next'
-import  { Telegraf } from 'telegraf';
-import * as dotenv from 'dotenv'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import bot from '@/utils/telegram'
 
-dotenv.config()
-
-const initialMessage = `Olá, meu nome é Artisan!
-Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
-
-const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
-Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
-const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
-
-const isProductionEnvironment = process.env.NODE_ENV === 'production'
-
-if(isProductionEnvironment){
-  bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
-}
-
-async function apiBot(_:any, response: NextApiResponse){    
-
-  bot.start((context) => context.reply(initialMessage));
-    
-  bot.on('text', (context) => context.reply(sorryMessage));
-
-  await bot.launch()
-
-  response.status(200)
+async function apiBot(request: NextApiRequest , response: NextApiResponse){    
+  try {
+    await bot.handleUpdate(request.body);
+    response.status(200).json({ message: 'All Nice!' });
+  } catch (error) {
+    response.status(500).json({ message: 'error' });
+  }
 
 }
 
