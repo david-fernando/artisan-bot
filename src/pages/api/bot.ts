@@ -1,13 +1,19 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiResponse } from 'next'
 import bot from '@/utils/telegram'
 
-async function apiBot(request: NextApiRequest , response: NextApiResponse){    
-  try {
-    await bot.handleUpdate(request.body);
-    response.status(200).json({ message: 'All Nice!' });
-  } catch (error) {
-    response.status(500).json({ message: 'error' });
-  }
+const initialMessage = `Olá, meu nome é Artisan!
+Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+
+const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
+Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+
+
+function apiBot(_:any, response: NextApiResponse){    
+  bot.start((context) => context.reply(initialMessage));
+    
+  bot.on('text', (context) => context.reply(sorryMessage));
+
+  response.json({ message: 'All nice!' })
 
 }
 
