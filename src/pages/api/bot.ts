@@ -11,22 +11,28 @@ import * as dotenv from 'dotenv'
     bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
   }
 
-function apiBot(_:any, response: NextApiResponse){
+async function apiBot(_:any, response: NextApiResponse){
 
-  const initialMessage = `Olá, meu nome é Artisan!
-Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+  try {
+    const initialMessage = `Olá, meu nome é Artisan!
+    Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+    
+      const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
+    Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+    
+    
+      bot.start((context) => context.reply(initialMessage));
+    
+      bot.on('text', (context) => context.reply(sorryMessage));
+    
+      await bot.launch();
+    
+      response.json({ message: 'All Nice!' })
 
-  const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
-Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+  } catch (error) {
+    response.json({ message: 'error' })
+  }
 
-
-  bot.start((context) => context.reply(initialMessage));
-
-  bot.on('text', (context) => context.reply(sorryMessage));
-
-  bot.launch();
-
-  response.json({ message: 'All Nice!' })
 }
 
 export default apiBot
