@@ -19,13 +19,17 @@ if(isProductionEnvironment){
 
 async function apiBot(_:any, response: NextApiResponse){    
 
-  bot.start((context) => context.reply(initialMessage));
+  // bot.start((context) => context.reply(initialMessage));
     
-  bot.on('text', (context) => context.reply(sorryMessage));
+  // bot.on('text', (context) => context.reply(sorryMessage));
 
-  await bot.launch()
+  // await bot.launch()
 
-  response.status(200)
+  setTimeout(()=>{
+    response.json({ message: 'Ok' })
+  }, 10000)
+
+  // response.status(200)
 
 }
 
