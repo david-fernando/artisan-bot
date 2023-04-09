@@ -13,8 +13,6 @@ async function apiBot(_:any, response: NextApiResponse){
     
   bot.on('text', (context) => context.reply(sorryMessage));
 
-  await bot.launch()
-
   response.json({ message: 'All nice!' })
 
 }
