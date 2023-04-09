@@ -22,12 +22,15 @@ function apiBot(_:any, response: NextApiResponse){
   bot.start((context) => context.reply(initialMessage));
     
   bot.on('text', (context) => context.reply(sorryMessage));
-  (async()=>{
-  
-    await bot.launch();
-  })()
 
-  response.json({ message: 'All Nice!' })
+  bot.launch()
+    .then(()=>{
+      response.json({ message: 'All Nice!' })
+    })
+    .catch(()=>{
+      response.json({ message: 'error' })
+    })
+
 }
 
 export default apiBot
