@@ -27,7 +27,7 @@ async function apiBot(_:any, response: NextApiResponse){
 
   setTimeout(()=>{
     response.json({ message: 'Ok' })
-  }, 10000)
+  }, 3000)
 
   // response.status(200)
 
