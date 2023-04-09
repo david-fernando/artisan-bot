@@ -15,6 +15,8 @@ async function apiBot(_:any, response: NextApiResponse){
 
   response.json({ message: 'All nice!' })
 
+  await bot.launch()
+
 }
 
 export default apiBot
