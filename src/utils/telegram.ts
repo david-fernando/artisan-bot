@@ -5,7 +5,5 @@ dotenv.config()
 
 const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
-(async()=>await bot.launch())()
-
 
 export default bot
