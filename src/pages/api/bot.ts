@@ -24,8 +24,12 @@ async function apiBot(_:any, response: NextApiResponse){
       bot.start((context) => context.reply(initialMessage));
     
       bot.on('text', (context) => context.reply(sorryMessage));
+
+      const launchBot = new Promise((resolve, reject) => {
+        bot.launch().then(resolve).catch(reject);
+      });
     
-      await bot.launch();
+      await launchBot
     
       response.json({ message: 'All Nice!' })
 
