@@ -2,41 +2,31 @@ import type { NextApiResponse } from 'next'
 import  { Telegraf } from 'telegraf';
 import * as dotenv from 'dotenv'
 
-  dotenv.config()
-  const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
+dotenv.config()
 
-  const isProductionEnvironment = process.env.NODE_ENV === 'production'
+const initialMessage = `Olá, meu nome é Artisan!
+Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
 
-  if(isProductionEnvironment){
-    bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
-  }
+const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
+Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
-async function apiBot(_:any, response: NextApiResponse){
+const isProductionEnvironment = process.env.NODE_ENV === 'production'
 
-  try {
-    const initialMessage = `Olá, meu nome é Artisan!
-    Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+if(isProductionEnvironment){
+  bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
+}
+
+(async()=>{
+  bot.start((context) => context.reply(initialMessage));
     
-      const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
-    Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
-    
-    
-      bot.start((context) => context.reply(initialMessage));
-    
-      bot.on('text', (context) => context.reply(sorryMessage));
+  bot.on('text', (context) => context.reply(sorryMessage));
 
-      const launchBot = new Promise((resolve, reject) => {
-        bot.launch().then(resolve).catch(reject);
-      });
-    
-      await launchBot
-    
-      response.json({ message: 'All Nice!' })
+  await bot.launch();
+})()
 
-  } catch (error) {
-    response.json({ message: 'error' })
-  }
-
+function apiBot(_:any, response: NextApiResponse){    
+  response.json({ message: 'All Nice!' })
 }
 
 export default apiBot
