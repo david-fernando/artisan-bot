@@ -13,6 +13,4 @@ if(isProductionEnvironment){
   bot.telegram.setWebhook(webHookUrl)
 }
 
-(async()=>await bot.launch())()
-
 export default bot
