@@ -17,19 +17,15 @@ if(isProductionEnvironment){
   bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
 }
 
-function apiBot(_:any, response: NextApiResponse){    
+async function apiBot(_:any, response: NextApiResponse){    
 
   bot.start((context) => context.reply(initialMessage));
     
   bot.on('text', (context) => context.reply(sorryMessage));
 
-  bot.launch()
-    .then(()=>{
-      response.json({ message: 'All Nice!' })
-    })
-    .catch(()=>{
-      response.json({ message: 'error' })
-    })
+  await bot.launch()
+
+  response.status(200)
 
 }
 
