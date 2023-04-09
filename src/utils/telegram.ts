@@ -13,9 +13,9 @@ const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
 const isProductionEnvironment = process.env.NODE_ENV === 'production'
 
-// if(isProductionEnvironment){
-//   bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
-// }
+if(isProductionEnvironment){
+  bot.telegram.setWebhook(`${process.env.WEBHOOK_URL}/bot${process.env.BOT_TOKEN}`)
+}
 
 bot.start((context) => context.reply(initialMessage));
     
