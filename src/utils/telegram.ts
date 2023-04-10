@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-const webHookUrl = `${process.env.VERCEL_URL}/api/bot`
+const webHookUrl = `${process.env.VERCEL_URL}/api/bot/`
 
 const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
