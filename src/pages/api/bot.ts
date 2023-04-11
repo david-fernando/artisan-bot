@@ -13,7 +13,9 @@ function apiBot(_:any, response: NextApiResponse){
     
   bot.on('text', (context) => context.reply(sorryMessage));
 
-  response.json({ message: 'All nice!' })
+  bot.launch()
+
+  return response.json({ message: 'All nice!' })
 
 }
 
