@@ -1,6 +1,15 @@
+import { useEffect } from 'react';
 import Head from 'next/head'
+import bot from '@/utils/bot'
 
 export default function Home() {
+  useEffect(() => {
+    console.log('Starting bot...');
+    bot.on('polling_error', (error) => {
+      console.error(error);
+    });
+  }, []);
+  
   return (
     <>
       <Head>
