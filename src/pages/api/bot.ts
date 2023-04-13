@@ -15,7 +15,6 @@ Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisa
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-
 const bot = new TelegramBot(token, {polling: true})
 
 if(isProduction){
