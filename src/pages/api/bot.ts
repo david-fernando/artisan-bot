@@ -19,7 +19,7 @@ const bot = new Bot(token)
 //   bot.setWebHook(`${webHookUrl}/${token}`, { allowed_updates: ["message"] });
 // }
 
-webhookCallback(bot, "next-js")
+webhookCallback(bot, "https")
 
 bot.on('message', (context) => context.reply(sorryMessage));
 
