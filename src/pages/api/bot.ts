@@ -1,25 +1,20 @@
 import type { NextApiResponse } from 'next'
-import bot from '@/utils/telegram'
-
-const initialMessage = `Olá, meu nome é Artisan!
-Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
+import TelegramBot from 'node-telegram-bot-api'
 
 const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
 Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
 
-const webHookUrl = `${process.env.VERCEL_URL}/api/bot/`
+const token = `${process.env.BOT_TOKEN}`
 
-function apiBot(_:any, response: NextApiResponse){    
-  bot.start((context) => context.reply(initialMessage));
-    
-  bot.on('text', (context) => context.reply(sorryMessage));
+const bot = new TelegramBot(token, {polling: true})
 
-  bot.launch({
-    webhook: {
-      domain: webHookUrl,
-      secretToken: process.env.BOT_TOKEN
-    }
-  })
+function apiBot(_:any, response: NextApiResponse){
+
+  bot.on('message', (message) => {
+    const chatId = message.chat.id;
+  
+    bot.sendMessage(chatId, sorryMessage);
+  });
 
   return response.json({ message: 'All nice!' })
 
