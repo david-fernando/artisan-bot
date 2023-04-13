@@ -1,5 +1,5 @@
 import type { NextApiResponse } from 'next'
-import { Bot } from "grammy";
+import { Bot, webhookCallback } from "grammy";
 import * as dotenv from 'dotenv'
 
 dotenv.config()
@@ -18,6 +18,8 @@ const bot = new Bot(token)
 // if(isProduction){
 //   bot.setWebHook(`${webHookUrl}/${token}`, { allowed_updates: ["message"] });
 // }
+
+webhookCallback(bot, "next-js")
 
 bot.on('message', (context) => context.reply(sorryMessage));
 
