@@ -23,13 +23,16 @@ webhookCallback(bot, "next-js")
 
 bot.on('message', (context) => context.reply(sorryMessage));
 
-async function apiBot(_:any, response: NextApiResponse){
-
+(async () => {
   bot.start()
     .then(()=> console.log('Bot iniciado'))
     .catch((error)=> console.log(error))
+})()
 
-  return response.json({ message: 'All nice!' })
+
+function apiBot(_:any, response: NextApiResponse){
+
+  return response.json({ message: 'Tudo certo!' })
 
 }
 
