@@ -1,4 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 const sorryMessage = `Sinto muito, mas ainda não posso executar nenhum comando! 
 Estou em desenvolvimento, mas quando estiver pronta serei capaz de variais coisas legais como editar suas fotos, ou transforma-las em artes.`
