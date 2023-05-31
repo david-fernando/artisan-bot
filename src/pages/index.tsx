@@ -1,9 +1,6 @@
-"use client"
 import Head from 'next/head'
-import bot from '@/utils/telegram'
 
 export default function Home() {
-  bot.launch()
   return (
     <>
       <Head>
