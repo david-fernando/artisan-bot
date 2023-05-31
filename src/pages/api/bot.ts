@@ -2,8 +2,7 @@ import bot from '@/utils/telegram'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-bot.launch()
-async function apiBot(require: NextApiRequest, response: NextApiResponse): Promise<void>{
+async function apiBot(require: NextApiRequest, response: NextApiResponse){
 
   try {
     await bot.handleUpdate(require.body)
