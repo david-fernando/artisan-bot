@@ -7,7 +7,7 @@ async function apiBot(require: NextApiRequest, response: NextApiResponse){
   try {
     await bot.handleUpdate(require.body)
     response.statusCode = 200
-    bot.on("message:text", (ctx) => ctx.reply("Bot em desenvolvimento"));
+    await bot.on("message:text", (ctx) => ctx.reply("Bot em desenvolvimento"));
     return response.json({ message: 'Tudo certo!' })
   } catch (error) {
     console.error(error)
