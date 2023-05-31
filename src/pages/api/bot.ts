@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 async function apiBot(require: NextApiRequest, response: NextApiResponse){
 
+  bot.launch()
   try {
     await bot.handleUpdate(require.body)
     response.statusCode = 200
