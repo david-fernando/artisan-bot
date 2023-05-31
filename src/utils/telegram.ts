@@ -7,8 +7,6 @@ dotenv.config()
 
 const bot = new Bot(`${process.env.BOT_TOKEN}`);
 
-bot.on("message:text", (ctx) => ctx.reply("Bot em desenvolvimento"));
-
 // (async()=>{
 //   await bot.launch({
 //     webhook: {
