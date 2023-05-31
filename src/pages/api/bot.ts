@@ -6,6 +6,7 @@ async function apiBot(require: NextApiRequest, response: NextApiResponse){
   await bot.init()
   try {
     response.statusCode = 200
+    bot.command('/start', (context) => context.reply('Olá, bem vindo ao meu bot!'));
     bot.on("message:text", (ctx) => ctx.reply("Bot em desenvolvimento"));
     return response.json({ message: 'Tudo certo!' })
   } catch (error) {
