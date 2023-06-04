@@ -7,6 +7,10 @@ dotenv.config()
 
 const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
+const url = process.env.VERCEL_URL || 'artisan-bot.vercel.app'
+
+bot.telegram.setWebhook(`${url}/api/bot`)
+
 bot.start((ctx) => {
   ctx.reply('Bem-vindo ao meu bot!')
 })
