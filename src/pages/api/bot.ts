@@ -4,12 +4,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 async function apiBot(require: NextApiRequest, response: NextApiResponse){
   try {
-    await bot.handleUpdate(require.body)
+    // await bot.handleUpdate(require.body)
     response.statusCode = 200
-    return response.json({ message: 'Tudo certo!' })
+    response.json({ message: 'Tudo certo!' })
+    process.once('SIGTERM', () => bot.stop('SIGTERM'));
   } catch (error) {
     console.error(error)
-    response.statusCode = 500
+    console.log(response.statusCode)
     return response.json({ message: 'Erro 500!' })
   }
 
