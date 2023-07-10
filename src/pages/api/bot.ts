@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 async function apiBot(require: NextApiRequest, response: NextApiResponse){
   try {
-    await bot.handleUpdate(require.body)
+    bot.handleUpdate(require.body)
     response.statusCode = 200
     return response.json({ message: 'Tudo certo!' })
   } catch (error) {
