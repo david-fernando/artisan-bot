@@ -9,7 +9,7 @@ async function apiBot(require: NextApiRequest, response: NextApiResponse){
   }
   try {
     await bot.handleUpdate(require.body)
-    response.json({ message: 'Tudo certo!' })
+    response.json({ message: 'All right!' })
   } catch (error) {
     return response.json({ message: 'Erro 500!' })
   }
