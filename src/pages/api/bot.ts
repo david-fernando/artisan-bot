@@ -5,7 +5,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 const token = process.env.BOT_TOKEN
 const webHookUrl = `${process.env.VERCEL_URL}/api/bot?secret_hash=${token}`
 
-
 async function apiBot(require: NextApiRequest, response: NextApiResponse){
   try {
     console.log(require.body)
