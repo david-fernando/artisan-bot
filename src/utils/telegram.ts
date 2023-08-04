@@ -31,7 +31,7 @@ bot.command('dev', (context) => {
 
 bot.on('photo', (context) => {
 
-  const { photo } = context.message
+  const photo = context.message.photo
 
   const photoId = photo[photo.length - 1].file_id
   context.replyWithPhoto(photoId);
