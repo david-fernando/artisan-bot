@@ -39,6 +39,7 @@ bot.on('photo', (context) => {
     const caption = context.message.caption || 'No caption'
   
     context.replyWithPhoto(photoId);
+    command[context.from.id] = ''
   }
 })
 
