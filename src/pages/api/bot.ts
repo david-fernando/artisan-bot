@@ -2,13 +2,9 @@ import bot from '@/utils/telegram'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const token = process.env.BOT_TOKEN
-const webHookUrl = `${process.env.VERCEL_URL}/api/bot?secret_hash=${token}`
-
 async function apiBot(require: NextApiRequest, response: NextApiResponse){
   try {
     console.log(require.body)
-    await bot.telegram.setWebhook(webHookUrl)
     await bot.handleUpdate(require.body)
     response.statusCode = 200
     response.json({ message: 'Tudo certo!' })
