@@ -1,10 +1,7 @@
 import { Telegraf } from 'telegraf';
-import { message } from 'telegraf/filters';
 const dotenv = require('dotenv')
 
 dotenv.config()
-
-// const webHookUrl = `${process.env.VERCEL_URL}/api/bot/`
 
 const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
@@ -30,15 +27,6 @@ bot.command('dev', (context) => {
 bot.on('message', (context) => {
   context.reply(`Ainda estou em desenvolvimento`)
 })
-
-// (async()=>{
-//   await bot.launch({
-//     webhook: {
-//       domain: webHookUrl,
-//       secretToken: process.env.BOT_TOKEN
-//     }
-//   })
-// })()
 
 
 export default bot
