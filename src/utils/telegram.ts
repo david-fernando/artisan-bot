@@ -31,10 +31,10 @@ bot.on(message('text'), (context) => {
 })
 
 bot.on('photo', (context) => {
-
   const photo = context.message.photo
-
   const photoId = photo[photo.length - 1].file_id
+  const caption = context.message.caption || 'No caption'
+
   context.replyWithPhoto(photoId);
 })
 
