@@ -40,6 +40,7 @@ bot.on('photo', (context) => {
     context.replyWithPhoto(photoId);
     command[context.from.id] = ''
   }
+  return context.reply('Digite o camando desejado!')
 })
 
 
