@@ -4,6 +4,8 @@ const dotenv = require('dotenv')
 
 dotenv.config()
 
+const command:any = {}
+
 const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
 
 const url = process.env.VERCEL_URL || 'artisan-bot.vercel.app'
@@ -21,9 +23,9 @@ bot.help((context) => {
   context.reply('Ainda estou em desenvolvimento.')
 })
 
-bot.command('dev', (context) => {
-  context.message
-  context.reply(reply)
+bot.command('test', async(context) => {
+  command[context.from.id] = 'test'
+  await context.reply('Envie a foto que você deseja melhorar a nitidez.');
 })
 
 bot.on(message('text'), (context) => {
@@ -31,11 +33,13 @@ bot.on(message('text'), (context) => {
 })
 
 bot.on('photo', (context) => {
-  const photo = context.message.photo
-  const photoId = photo[photo.length - 1].file_id
-  const caption = context.message.caption || 'No caption'
-
-  context.replyWithPhoto(photoId);
+  if(command[context.from.id] === 'test'){
+    const photo = context.message.photo
+    const photoId = photo[photo.length - 1].file_id
+    const caption = context.message.caption || 'No caption'
+  
+    context.replyWithPhoto(photoId);
+  }
 })
 
 
