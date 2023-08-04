@@ -1,4 +1,5 @@
 import { Telegraf } from 'telegraf';
+import { message } from 'telegraf/filters';
 const dotenv = require('dotenv')
 
 dotenv.config()
@@ -33,8 +34,8 @@ bot.on('photo', (context) => {
   context.replyWithPhoto(photoId);
 })
 
-bot.on('message', (context) => {
-  context.reply(`Ainda estou em desenvolvimento`)
+bot.on(message('text'), (context) => {
+  context.reply(reply)
 })
 
 
