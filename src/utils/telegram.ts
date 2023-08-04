@@ -21,11 +21,20 @@ bot.help((context) => {
 })
 
 bot.command('dev', (context) => {
+  context.message
   context.reply(reply)
 })
 
 bot.on('message', (context) => {
   context.reply(`Ainda estou em desenvolvimento`)
+})
+
+bot.on('photo', (context) => {
+
+  const { photo } = context.message
+
+  const photoId = photo[photo.length - 1].file_id
+  context.replyWithPhoto(photoId);
 })
 
 
