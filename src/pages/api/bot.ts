@@ -7,13 +7,13 @@ async function apiBot(require: NextApiRequest, response: NextApiResponse){
   if(!isPost){
     return response.json({ message: 'This route accepts only Post Requests' })
   }
+  
   try {
     await bot.handleUpdate(require.body)
     response.json({ message: 'All right!' })
   } catch (error) {
     return response.json({ message: 'Erro 500!' })
   }
-
 }
 
 export default apiBot
