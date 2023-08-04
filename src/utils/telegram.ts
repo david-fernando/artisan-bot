@@ -26,6 +26,10 @@ bot.command('dev', (context) => {
   context.reply(reply)
 })
 
+bot.on(message('text'), (context) => {
+  context.reply(reply)
+})
+
 bot.on('photo', (context) => {
 
   const photo = context.message.photo
@@ -34,9 +38,6 @@ bot.on('photo', (context) => {
   context.replyWithPhoto(photoId);
 })
 
-bot.on(message('text'), (context) => {
-  context.reply(reply)
-})
 
 
 export default bot
