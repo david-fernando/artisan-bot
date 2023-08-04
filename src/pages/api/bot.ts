@@ -3,14 +3,14 @@ import bot from '@/utils/telegram'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 async function apiBot(require: NextApiRequest, response: NextApiResponse){
+  const isPost = require.method === 'POST'
+  if(!isPost){
+    return response.json({ message: 'This route accepts only Post Requests' })
+  }
   try {
-    console.log(require.body)
     await bot.handleUpdate(require.body)
-    response.statusCode = 200
     response.json({ message: 'Tudo certo!' })
   } catch (error) {
-    console.error(error)
-    console.log(response.statusCode)
     return response.json({ message: 'Erro 500!' })
   }
 
