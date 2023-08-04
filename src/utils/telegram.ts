@@ -36,7 +36,6 @@ bot.on('photo', (context) => {
   if(command[context.from.id] === 'test'){
     const photo = context.message.photo
     const photoId = photo[photo.length - 1].file_id
-    const caption = context.message.caption || 'No caption'
   
     context.replyWithPhoto(photoId);
     command[context.from.id] = ''
