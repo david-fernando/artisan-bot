@@ -26,8 +26,8 @@ bot.help((context) => {
   context.reply('Ainda estou em desenvolvimento.')
 })
 
-bot.command('test', async(context) => {
-  command[context.from.id] = 'test'
+bot.command('aumentarnitidez', async(context) => {
+  command[context.from.id] = 'aumentarnitidez'
   await context.reply('Envie a foto que você deseja melhorar a nitidez.');
 })
 
@@ -36,7 +36,7 @@ bot.on(message('text'), (context) => {
 })
 
 bot.on('photo', async(context) => {
-  if(command[context.from.id] !== 'test'){
+  if(command[context.from.id] !== 'aumentarnitidez'){
     return context.reply('Digite o camando desejado!')
   }
     const photo = context.message.photo
