@@ -58,6 +58,4 @@ bot.on('photo', async(context) => {
   }
 )
 
-
-
 export default bot
