@@ -1,15 +1,13 @@
 import { Telegraf } from 'telegraf';
 import { message } from 'telegraf/filters';
-import axios from 'axios'
+import { api } from '@/services/api';
 const dotenv = require('dotenv')
 
 dotenv.config()
 
-const command:any = {}
+const commands:any = {}
 
 const bot = new Telegraf(`${process.env.BOT_TOKEN}`);
-
-const picWishToken = process.env.PICWISH_API_KEY
 
 const url = process.env.VERCEL_URL || 'artisan-bot.vercel.app'
 
@@ -17,6 +15,10 @@ bot.telegram.setWebhook(`${url}/api/bot`)
 
 const reply = `Olá sou Artisan! Ainda estou em desenvolvimento, mas quando estiver pronta serei capaz de 
 transformar suas fotos em artes e varias outras coisas legais.`
+
+const iDontUnderstandReply = `Não entendi! Por favor, escolha um dos comandos abaixo:
+/melhorarnitidezselfie ideal para fotos com uma ou duas pessoas
+/melhorarnitidezfoto ideal para fotos com varias pessoas`
 
 bot.start((context) => {
   context.reply(reply)
@@ -26,9 +28,14 @@ bot.help((context) => {
   context.reply('Ainda estou em desenvolvimento.')
 })
 
-bot.command('aumentarnitidez', async(context) => {
-  command[context.from.id] = 'aumentarnitidez'
-  await context.reply('Envie a foto que você deseja melhorar a nitidez.');
+bot.command('melhorarnitidezfoto', async(context) => {
+  commands[context.from.id] = 'enhancerPhoto'
+  await context.reply('Já pode enviar sua foto!');
+})
+
+bot.command('melhorarnitidezselfie', async(context) => {
+  commands[context.from.id] = 'enhancerSelfie'
+  await context.reply('já pode enviar sua foto!');
 })
 
 bot.on(message('text'), (context) => {
@@ -36,32 +43,16 @@ bot.on(message('text'), (context) => {
 })
 
 bot.on('photo', async(context) => {
-  if(command[context.from.id] !== 'aumentarnitidez'){
-    return context.reply('Digite o camando desejado!')
+  if(Object.keys(commands).length === 0){
+    return context.reply(iDontUnderstandReply)
   }
     const photo = context.message.photo
     const photoId = photo[photo.length - 1].file_id
     const fileInfo = await context.telegram.getFile(photoId)
     const photoUrl = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${fileInfo.file_path}`;
-    const data = {
-      sync: '1',
-      image_url: photoUrl,
-      type: 'face'
-    }
-    const options = {
-      method: 'POST',
-      headers: { 
-        'content-type': 'application/x-www-form-urlencoded',
-        'X-API-KEY': picWishToken 
-      },
-      data: JSON.stringify(data),
-      url: 'https://techhk.aoscdn.com/api/tasks/visual/scale',
-    }
-
-    const result = await axios(options)
-
-    const image = result.data.data.image
-    console.log(image)
+    const command = commands[context.from.id]
+    const image = await api[command](photoUrl)
+    context.reply('Aqui estar sua foto!')
     context.replyWithPhoto(image);
     command[context.from.id] = ''
   }
