@@ -13,8 +13,14 @@ function start(callback: (context:Context) => void) {
   return callback(context)
 }
 
+function help(callback: (context:Context) => void) {
+  if(!context.reply) return ;
+  return callback(context)
+}
+
 const bot = {
-  start
+  start,
+  help
 }
 
 export default bot
