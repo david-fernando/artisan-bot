@@ -9,4 +9,11 @@ transformar suas fotos em artes e varias outras coisas legais.`
       expect(response).toBe(reply)
     })
   })
+  test("Should return a message from help command", ()=>{
+    const message = 'Ainda estou em desenvolvimento'
+    bot.help((context)=>{
+      const response = context.reply?.(message)
+      expect(response).toBe(message)
+    })
+  })
 })
