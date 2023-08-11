@@ -3,14 +3,9 @@ type Context = {
   replyWithPhoto?: (value:string) => {} 
 }
 
-const reply = (value:string) => value
-
-const replyWithPhoto = (value:string) => value
-
-
 const context:Context = {
-  reply,
-  replyWithPhoto
+  reply: (value:string) => value,
+  replyWithPhoto: (value:string) => value
 }
 
 function start(callback: (context:Context) => void) {
