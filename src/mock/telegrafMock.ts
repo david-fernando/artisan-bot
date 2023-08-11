@@ -13,8 +13,8 @@ function start(callback: (context:Context) => void) {
   return callback(context)
 }
 
-const botMock = {
+const bot = {
   start
 }
 
-export default botMock
+export default bot
